@@ -1,0 +1,6 @@
+[submodule "roxxy"]
+	path = roxxy
+	url = git@github.com:isshoni-soft/roxxy.git
+[submodule "hange"]
+	path = hange
+	url = git@github.com:isshoni-soft/hange.git
