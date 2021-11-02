@@ -1,0 +1,37 @@
+version: '3'
+tasks:
+  pull-submodules:
+    run: once
+    desc: Pulls all submodules
+    cmds:
+      - cd roxxy && git pull && cd ..
+      - cd hange && git pull && cd ..
+  push-submodules:
+    run: once
+    desc: Pushes all submodules
+    cmds:
+      - cd roxxy && git push && cd ..
+      - cd hange && git push && cd ..
+  init-submodules:
+    run: once
+    desc: Runs appropriate git command to initialze submodules
+    cmds:
+      - git submodule init
+  clean:
+    run: once
+    desc: Deletes the ./build/ directory
+    cmds:
+      - rm -vfr ./build/
+      - rm -v *.log
+  build:
+    run: once
+    desc: Builds the configuration generator tool
+    generates: [ "build/media_manager{{exeExt}}" ]
+    cmds:
+      - go build -o build/media_manager{{exeExt}} main.go
+  run:
+    run: once
+    desc: Runs the node
+    deps: [ build ]
+    cmds:
+      - ./build/media_manager{{exeExt}} {{.CLI_ARGS}}
